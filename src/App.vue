@@ -1,11 +1,9 @@
 <template>
   <div>
-    <div>
-      <button v-on:click="addLike">Like</button>
-      <button @click="addDislike">Dislike</button>
+    <div class="post">
+     <div><strong>Title:</strong></div>
+     <div><strong>Description:</strong></div>
     </div>
-    <div>Likes count <strong>{{likes}}</strong></div>
-    <div>Dislikes count <strong>{{dislikes}}</strong></div>
   </div>
 </template>
 
