@@ -1,8 +1,12 @@
 <template>
         <div class="app">
-         <post-form
-             @create="createPost"
-         />
+       <h1>Page with posts</h1>
+          <my-dialog v-model:show="dialogVisible">
+            <post-form
+                @create="createPost"
+            />
+          </my-dialog>
+
          <post-list
              :posts="posts"
              @remove="removePost"
@@ -13,10 +17,12 @@
 <script>
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
+import MyDialog from "@/components/UI/MyDialog";
 
 //по дефолту всегда экспортируем объект
 export default {
   components: {
+    MyDialog,
     PostForm, PostList
   },
     data() {
@@ -26,7 +32,8 @@ export default {
         {id: 2, title: 'TypeScript', body: 'TypeScript description'},
         {id: 3, title: 'ReactJS', body: 'ReactJS description'},
         {id: 1, title: 'VueJS', body: 'VueJS description'}
-      ]
+      ],
+           dialogVisible: false
     }
   },
   methods: {
