@@ -1,49 +1,53 @@
 <template>
   <form @submit.prevent>
     <h4>Creating a post</h4>
-    <input
-        v-bind:value="title"
-        @input="title = $event.target.value"
-        class="input" type="text"
+    <my-input
+        v-model="post.title"
+        type="text"
         placeholder="Enter title!"
-    >
-    <input
-        v-bind:value="body"
-        @input="body = $event.target.value"
-        class="input" type="text"
+    />
+    <my-input
+        v-model="post.body"
+        type="text"
         placeholder="Enter description!"
+    />
+    <my-button
+        style="align-self: flex-end; margin-top: 15px"
+        @click="createPost"
     >
-    <button
-        class="btn"
-
-    >Create</button>
+      Create
+    </my-button>
 
   </form>
 </template>
 
 <script>
-export default {
 
+export default {
+  data() {
+        return {
+        post: {
+          title: '',
+          body: ''
+        }
+       }
+   },
+  methods: {
+    createPost() {
+      this.post.id = Date.now()
+      this.$emit('create', this.post)
+      this.post={
+        title: '',
+        body: ''
+      }
+    }
+  }
 }
 </script>
 
 <style scoped>
-.input{
-  width: 100%;
-  border: 3px solid teal;
-  padding: 10px 15px;
-  margin-top: 10px;
-  border-radius: 12px;
-  background-color: #cff8ee;
-}
-.btn{
-  margin-top: 10px;
-  align-self: flex-end;
-  padding: 10px 15px;
-  background: none;
-  color: teal;
-  border: 3px solid teal;
-  border-radius: 12px;
+form{
+  display: flex;
+  flex-direction: column;
 }
 </style>
-
