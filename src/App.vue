@@ -5,6 +5,7 @@
          />
          <post-list
              :posts="posts"
+             @remove="removePost"
          />
         </div>
 </template>
@@ -18,7 +19,7 @@ export default {
   components: {
     PostForm, PostList
   },
-    data(){
+    data() {
          return {
       posts: [
         {id: 1, title: 'JavaScript', body: 'JavaScript description'},
@@ -30,7 +31,10 @@ export default {
   },
   methods: {
     createPost(post) {
-   this.posts.push(post)
+        this.posts.push(post)
+    },
+    removePost(post) {
+      this.posts = this.posts.filter(p => p.id !== post.id)
     },
   }
 }
