@@ -2,13 +2,17 @@
         <div class="app">
 
        <h1>Page with posts</h1>
-
+       <my-input
+       v-model="searchQuery"
+       placeholder="Searching..."
+       />
        <div class="app_btns">
          <my-button @click="showDialog" >
            Create a user
          </my-button>
          <my-select
            v-model="selectedSort"
+           :options="sortOptions"
          />
        </div>
 
@@ -20,7 +24,7 @@
           </my-dialog>
 
          <post-list
-             :posts="posts"
+             :posts="sortedAndSearchedPosts"
              @remove="removePost"
              v-if="!isPostsLoading"
          />
@@ -35,23 +39,29 @@ import MyDialog from "@/components/UI/MyDialog";
 import MyButton from "@/components/UI/MyButton";
 import axios from "axios";
 import MySelect from "@/components/UI/MySelect";
+import MyInput from "@/components/UI/MyInput";
 
 //по дефолту всегда экспортируем объект
 export default {
   components: {
+    MyInput,
     MySelect,
     MyButton,
     MyDialog,
-    PostForm, PostList
+    PostForm,
+    PostList
   },
     data() {
          return {
-      posts: [],
+           posts: [],
            dialogVisible: false,
-          isPostsLoading: false,
+           isPostsLoading: false,
            selectedSort: '',
+           searchQuery: '',
            sortOptions: [
-             {value: 'title', name: 'By Name'}
+             {value: 'title', name: 'By Name'},
+             {value: 'body', name: 'By description'},
+             {value: 'id', name: 'By id'}
            ]
     }
   },
@@ -82,8 +92,16 @@ export default {
         }
     }
   },
-   mounted(){
+   mounted() {
      this.fetchPosts()
+  },
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
+    },
+    sortedAndSearchedPosts() {
+      return  this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
+    }
   }
 }
 </script>
