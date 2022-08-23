@@ -3,9 +3,15 @@
 
        <h1>Page with posts</h1>
 
-          <my-button @click="showDialog" style="margin: 15px 0">
-            Create a user
-          </my-button>
+       <div class="app_btns">
+         <my-button @click="showDialog" >
+           Create a user
+         </my-button>
+         <my-select
+           v-model="selectedSort"
+         />
+       </div>
+
 
           <my-dialog v-model:show="dialogVisible">
             <post-form
@@ -28,10 +34,12 @@ import PostList from "@/components/PostList";
 import MyDialog from "@/components/UI/MyDialog";
 import MyButton from "@/components/UI/MyButton";
 import axios from "axios";
+import MySelect from "@/components/UI/MySelect";
 
 //по дефолту всегда экспортируем объект
 export default {
   components: {
+    MySelect,
     MyButton,
     MyDialog,
     PostForm, PostList
@@ -40,7 +48,11 @@ export default {
          return {
       posts: [],
            dialogVisible: false,
-          isPostsLoading: false
+          isPostsLoading: false,
+           selectedSort: '',
+           sortOptions: [
+             {value: 'title', name: 'By Name'}
+           ]
     }
   },
   methods: {
@@ -82,10 +94,14 @@ export default {
    padding: 0;
    box-sizing: border-box;
  }
+ .app{
+   padding: 20px;
+ }
 
- form{
+ .app_btns{
    display: flex;
-   flex-direction: column;
+   justify-content: space-between;
+   margin: 15px 0
  }
 
 </style>
