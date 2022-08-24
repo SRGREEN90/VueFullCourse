@@ -58,6 +58,9 @@ export default {
            isPostsLoading: false,
            selectedSort: '',
            searchQuery: '',
+           page: 1,
+           limit: 10,
+           totalPage: 0,
            sortOptions: [
              {value: 'title', name: 'By Name'},
              {value: 'body', name: 'By description'},
@@ -80,7 +83,13 @@ export default {
         try {
           this.isPostsLoading = true
           setTimeout(async  () => {
-            const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+            const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+              params: {
+                _page: this.page,
+                limit: this.limit
+              }
+            });
+            this.totalPage = Math.ceil(response.headers['x-total-count'] / this.limit)
             this.posts = response.data
             this.isPostsLoading = false
           },1000)
