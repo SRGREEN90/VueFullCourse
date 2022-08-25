@@ -1,15 +1,15 @@
 <template>
   <div class="navbar">
-    <div>Vue3</div>
+    <div @click="$router.push('/')">Vue3</div>
     <div class="navbar__btns">
       <my-button
           style="background-color: white"
-
-      >Users</my-button>
+          @click="$router.push('/posts')"
+      >Posts</my-button>
       <my-button
           style="background-color: white;
           margin-left: 20px"
-
+          @click="$router.push('/about')"
       >About app</my-button>
     </div>
   </div>
