@@ -9,11 +9,15 @@ const routes = [
         component: MainPage
     },
     {
-        path: '/users',
+        path: '/posts',
         component: UserPage
     },
     {
         path: '/about',
+        component: About
+    },
+    {
+        path: '/posts/:id',
         component: About
     }
 ]

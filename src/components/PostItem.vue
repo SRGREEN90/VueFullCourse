@@ -5,7 +5,11 @@
      <div><strong>Title: </strong>{{post.title}}}</div>
      <div><strong>Description: </strong>{{post.body}}}</div>
    </div>
-
+    <div class="post__btns">
+      <my-button
+          @click="$emit('remove', post)"
+      >Open</my-button>
+    </div>
     <div class="post__btns">
         <my-button
         @click="$emit('remove', post)"
@@ -35,5 +39,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.post__btns{
+  display: flex;
+
 }
 </style>
