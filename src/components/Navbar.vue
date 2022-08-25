@@ -2,16 +2,20 @@
   <div class="navbar">
     <div>Vue3</div>
     <div class="navbar__btns">
-      <my-button>Users</my-button>
-      <my-button>About app</my-button>
+      <my-button
+          style="background-color: white"
 
+      >Users</my-button>
+      <my-button
+          style="background-color: white;
+          margin-left: 20px"
+
+      >About app</my-button>
     </div>
   </div>
 </template>
 
-
 <script>
-
 export default {
 
 }
@@ -23,6 +27,10 @@ export default {
   background-color: teal;
   box-shadow: 2px 2px 4px gray;
   display: flex;
+  align-items: center;
+}
+.navbar__btns{
+  margin-left: auto;
 }
 </style>
 
