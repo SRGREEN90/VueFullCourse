@@ -5,6 +5,7 @@
     <my-input
         v-model="searchQuery"
         placeholder="Searching..."
+        v-focus
     />
     <div class="app_btns">
       <my-button @click="showDialog" >
