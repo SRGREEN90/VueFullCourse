@@ -1,6 +1,6 @@
 <template>
   <div >
-
+    <h1>{{$store.state.likes}}</h1>
     <h1>Page with posts</h1>
     <my-input
         v-model="searchQuery"

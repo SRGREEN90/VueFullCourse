@@ -2,7 +2,7 @@ import {createStore} from "vuex"
 
 export default createStore({
       state: {
-
+         likes: 0
       },
       getters: {
 
@@ -11,6 +11,9 @@ export default createStore({
 
       },
       actions: {
+
+      },
+      modules: {
 
       }
 })
