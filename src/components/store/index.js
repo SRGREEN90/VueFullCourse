@@ -2,10 +2,12 @@ import {createStore} from "vuex"
 
 export default createStore({
       state: {
-         likes: 0
+       likes: 2
       },
       getters: {
-
+          doubleLikes() {
+                return state.likes * 2
+          }
       },
       mutations: {
 
