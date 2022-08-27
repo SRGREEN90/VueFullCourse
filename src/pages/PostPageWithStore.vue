@@ -1,12 +1,5 @@
 <template>
   <div>
-    <h1>{{ $store.state.isAuth ? 'Welcome!' : 'Please log in!'}}</h1>
-    <h1>{{ $store.state.doubleLikes }}</h1>
-    <div>
-      <my-button @click="$store.commit('incrementLikes')">Like</my-button>
-      <my-button @click="$store.commit('decrementLikes')">Dislike</my-button>
-    </div>
-
     <h1>Page with posts</h1>
     <my-input
         v-model="searchQuery"
