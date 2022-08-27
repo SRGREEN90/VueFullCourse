@@ -1,6 +1,12 @@
 <template>
-  <div >
-    <h1>{{$store.state.likes}}</h1>
+  <div>
+    <h1>{{ $store.state.isAuth ? 'Welcome!' : 'Please log in!'}}</h1>
+    <h1>{{ $store.state.doubleLikes }}</h1>
+    <div>
+      <my-button @click="$store.commit('incrementLikes')">Like</my-button>
+      <my-button @click="$store.commit('decrementLikes')">Dislike</my-button>
+    </div>
+
     <h1>Page with posts</h1>
     <my-input
         v-model="searchQuery"
@@ -31,17 +37,6 @@
     />
     <div v-else style="padding-left: 200px; color: red">LOADING...</div>
     <div v-intersection="loadMorePosts" class="observer"></div>
-
-    <!--          <div class="page__wrapper">-->
-    <!--            <div-->
-    <!--                v-for="pageNumber in totalPages"-->
-    <!--                :key="pageNumber"-->
-    <!--                class="page"-->
-    <!--                :class="{'current-page': page === pageNumber}"-->
-    <!--                @click="changePage(pageNumber)"-->
-    <!--            >-->
-    <!--              {{pageNumber}}</div>-->
-    <!--          </div>-->
   </div>
 </template>
 
@@ -54,7 +49,6 @@ import axios from "axios";
 import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
 
-//по дефолту всегда экспортируем объект
 export default {
   components: {
     MyInput,
@@ -133,18 +127,6 @@ export default {
   },
   mounted() {
     this.fetchPosts()
-
-    // const options = {
-    //   rootMargin: '0px',
-    //   threshold: 1.0
-    // }
-    // const callback = (entries, observer) => {
-    //   if(entries[0].isIntersecting && this.page < this.totalPages){
-    //     this.loadMorePosts()
-    //   }
-    // };
-    // const observer = new IntersectionObserver(callback, options);
-    // observer.observe(this.$refs.observer)
   },
   computed: {
     sortedPosts() {
