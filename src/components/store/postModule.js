@@ -19,7 +19,9 @@ export const postModule = {
 
     },
     mutations: {
-
+        setPosts(state, posts) {
+            state.posts = posts
+        }
     },
     actions: {
 
