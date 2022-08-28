@@ -21,6 +21,15 @@ export const postModule = {
     mutations: {
         setPosts(state, posts) {
             state.posts = posts
+        },
+        setLoading(state, bool) {
+            state.isPostLoading = bool
+        },
+        setPage(state, page) {
+            state.page = page
+        },
+        setSelectedSort() {
+
         }
     },
     actions: {
