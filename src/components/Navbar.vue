@@ -11,11 +11,12 @@
           margin-left: 20px"
           @click="$router.push('/about')"
       >About app</my-button>
-      <my-button
-          style="background-color: white;
-          margin-left: 20px"
+      <my-button style="background-color: white; margin-left: 20px"
           @click="$router.push('/store')"
       >Store</my-button>
+      <my-button style="background-color: white; margin-left: 20px"
+                 @click="$router.push('/composition')"
+      >Composition</my-button>
     </div>
   </div>
 </template>
@@ -42,3 +43,4 @@ export default {
 
 <router-link to="/users">Users</router-link>
 <router-link to="/about">About app</router-link>
+<!--<router-link to="/store">Store</router-link>-->
