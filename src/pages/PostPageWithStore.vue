@@ -1,22 +1,21 @@
 <template>
   <div>
     <h1>Page with posts</h1>
-    <my-input
-        v-model="searchQuery"
-        placeholder="Searching..."
-        v-focus
-    />
+<!--    <my-input-->
+<!--        v-model="searchQuery"-->
+<!--        placeholder="Searching..."-->
+<!--        v-focus-->
+<!--    />-->
     <div class="app_btns">
       <my-button @click="showDialog" >
         Create a user
       </my-button>
-      <my-select
-          v-model="selectedSort"
-          :options="sortOptions"
-      />
+
+<!--      <my-select-->
+<!--          v-model="selectedSort"-->
+<!--          :options="sortOptions"-->
+<!--      />-->
     </div>
-
-
     <my-dialog v-model:show="dialogVisible">
       <post-form
           @create="createPost"
@@ -30,24 +29,36 @@
     />
     <div v-else style="padding-left: 200px; color: red">LOADING...</div>
     <div v-intersection="loadMorePosts" class="observer"></div>
+
+    <!--          <div class="page__wrapper">-->
+    <!--            <div-->
+    <!--                v-for="pageNumber in totalPages"-->
+    <!--                :key="pageNumber"-->
+    <!--                class="page"-->
+    <!--                :class="{'current-page': page === pageNumber}"-->
+    <!--                @click="changePage(pageNumber)"-->
+    <!--            >-->
+    <!--              {{pageNumber}}</div>-->
+    <!--          </div>-->
   </div>
 </template>
 
 <script>
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
-import MyDialog from "@/components/UI/MyDialog";
+// import MyDialog from "@/components/UI/MyDialog";
 import MyButton from "@/components/UI/MyButton";
 import axios from "axios";
 import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
     MyInput,
     MySelect,
     MyButton,
-    MyDialog,
+    // MyDialog,
     PostForm,
     PostList
   },
@@ -85,7 +96,7 @@ export default {
 
   },
   mounted() {
-    this.fetchPosts()
+    // this.fetchPosts()
   },
   computed: {
 
