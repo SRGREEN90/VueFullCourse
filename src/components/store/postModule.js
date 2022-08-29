@@ -50,35 +50,33 @@ export const postModule = {
                 commit('setLoading', true)
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                     params: {
-                        _page: this.page,
-                        limit: this.limit
+                        _page: state.page,
+                        _limit: state.limit
                     }
                 });
-                this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
-                this.posts = response.data
+                commit('setTotalPages', Math.ceil(response.headers['x-total-count'] / state.limit))
+                commit('setPosts', response.data)
             } catch (e) {
                 alert('Error!!!')
             } finally {
-                this.isPostsLoading = false
+                commit('setLoading', false)
             }
         },
-        async loadMorePosts() {
+        async loadMorePosts(state, commit) {
             try {
-                this.page +=1;
-
+                commit('setPage', state.page + 1);
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                     params: {
-                        _page: this.page,
-                        limit: this.limit
+                        _page: state.page,
+                        _limit: state.limit
                     }
                 });
-                this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
-                this.posts = [...this.posts, ...response.data]
+                commit('setTotalPages', Math.ceil(response.headers['x-total-count'] / state.limit))
+                commit('setPosts', [...this.posts, ...response.data])
             } catch (e) {
                 alert('Error!!!')
-            } finally {
-
             }
         }
-    }
+    },
+    namespaced: true
 }
