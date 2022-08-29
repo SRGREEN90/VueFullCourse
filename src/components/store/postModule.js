@@ -18,7 +18,7 @@ export const postModule = {
     }),
     getters:{
         sortedPosts(state) {
-            return [state.posts].sort((post1, post2) => post1[state.selectedSort]?.localeCompare(post2[state.selectedSort]))
+            return [...state.posts].sort((post1, post2) => post1[state.selectedSort]?.localeCompare(post2[state.selectedSort]))
         },
         sortedAndSearchedPosts(state, getters) {
             return  getters.sortedPosts.filter(post => post.title.toLowerCase().includes(state.searchQuery.toLowerCase()))
@@ -45,7 +45,7 @@ export const postModule = {
         },
     },
     actions: {
-        async fetchPosts({state, commit, }) {
+        async fetchPosts({state, commit }) {
             try {
                 commit('setLoading', true)
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
@@ -62,7 +62,7 @@ export const postModule = {
                 commit('setLoading', false)
             }
         },
-        async loadMorePosts(state, commit) {
+        async loadMorePosts({state, commit}) {
             try {
                 commit('setPage', state.page + 1);
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
@@ -72,7 +72,7 @@ export const postModule = {
                     }
                 });
                 commit('setTotalPages', Math.ceil(response.headers['x-total-count'] / state.limit))
-                commit('setPosts', [...this.posts, ...response.data])
+                commit('setPosts', [...state.posts, ...response.data])
             } catch (e) {
                 alert('Error!!!')
             }

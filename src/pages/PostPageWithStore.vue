@@ -64,22 +64,17 @@ export default {
   },
   data() {
     return {
-      posts: [],
-      dialogVisible: false,
-      isPostsLoading: false,
-      selectedSort: '',
-      searchQuery: '',
-      page: 1,
-      limit: 10,
-      totalPages: 0,
-      sortOptions: [
-        {value: 'title', name: 'By Name'},
-        {value: 'body', name: 'By description'},
-        {value: 'id', name: 'By id'}
-      ]
+      dialogVisible: false
     }
   },
   methods: {
+    ...mapMutations({
+      setPage: 'post/setPage'
+    }),
+    ...mapActions({
+         loadMorePosts: 'post/loadMorePosts',
+         fetchPosts: 'post/fetchPosts'
+    }),
     createPost(post) {
       this.posts.push(post);
       this.dialogVisible = false
@@ -89,17 +84,26 @@ export default {
     },
     showDialog() {
       this.dialogVisible = true
-    },
-    // changePage(pageNumber) {
-    //    this.page = pageNumber
-    // },
-
+    }
   },
   mounted() {
-    // this.fetchPosts()
+    this.fetchPosts()
   },
   computed: {
-
+     ...mapState({
+       posts: state => state.post.posts,
+       isPostsLoading: state => state.post.isPostsLoading,
+       selectedSort: state => state.post.selectedSort,
+       searchQuery: state => state.post.searchQuery,
+       page: state => state.post.page,
+       limit: state => state.post.limit,
+       totalPages: state => state.post.totalPages,
+       sortOptions: state => state.post.sortOptions,
+     }),
+    ...mapGetters({
+      sortedPosts: 'post/sortedPosts',
+      sortedAndSearchedPosts: 'post/sortedAndSearchedPosts'
+    })
   },
   watch:{
     // page(){
