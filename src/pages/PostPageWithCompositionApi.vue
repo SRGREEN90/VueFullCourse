@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>{{likes}}</h1>
     <h1>Page with posts</h1>
 <!--    <my-input-->
 <!--        v-model="searchQuery"-->
@@ -16,8 +15,6 @@
 <!--          :options="sortOptions"-->
 <!--      />-->
 <!--    </div>-->
-
-
 <!--    <my-dialog v-model:show="dialogVisible">-->
 <!--      <post-form-->
 <!--          @create="createPost"-->
@@ -37,7 +34,7 @@
 <script>
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
-import MyDialog from "@/components/UI/MyDialog";
+//import MyDialog from "@/components/UI/MyDialog";
 import MyButton from "@/components/UI/MyButton";
 import axios from "axios";
 import MySelect from "@/components/UI/MySelect";
@@ -50,7 +47,7 @@ export default {
     MyInput,
     MySelect,
     MyButton,
-    MyDialog,
+    // MyDialog,
     PostForm,
     PostList
   },
@@ -65,12 +62,12 @@ export default {
   },
   setUp(props){
     const likes = ref(2)
-    console.log(likes)
     const addLike = () => {
-      likes.value
+      likes.value += 1
     }
     return{
-      likes
+      likes,
+      addLike
     }
   }
 }
