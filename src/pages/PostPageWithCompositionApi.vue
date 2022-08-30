@@ -40,6 +40,7 @@ import axios from "axios";
 import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
 import {ref} from "vue";
+import {usePosts} from "@/hooks/usePosts";
 
 //по дефолту всегда экспортируем объект
 export default {
@@ -61,10 +62,7 @@ export default {
     }
   },
   setUp(props){
-    const likes = ref(2)
-    const addLike = () => {
-      likes.value += 1
-    }
+    const {posts, totalPages, isPostLoading} = usePosts(10)
     return{
       likes,
       addLike
