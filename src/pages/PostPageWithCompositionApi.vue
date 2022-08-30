@@ -1,36 +1,36 @@
 <template>
-  <div >
-
+  <div>
+    <h1>{{likes}}</h1>
     <h1>Page with posts</h1>
-    <my-input
-        v-model="searchQuery"
-        placeholder="Searching..."
-        v-focus
-    />
-    <div class="app_btns">
-      <my-button @click="showDialog" >
-        Create a user
-      </my-button>
-      <my-select
-          v-model="selectedSort"
-          :options="sortOptions"
-      />
-    </div>
+<!--    <my-input-->
+<!--        v-model="searchQuery"-->
+<!--        placeholder="Searching..."-->
+<!--        v-focus-->
+<!--    />-->
+<!--    <div class="app_btns">-->
+<!--      <my-button @click="showDialog" >-->
+<!--        Create a user-->
+<!--      </my-button>-->
+<!--      <my-select-->
+<!--          v-model="selectedSort"-->
+<!--          :options="sortOptions"-->
+<!--      />-->
+<!--    </div>-->
 
 
-    <my-dialog v-model:show="dialogVisible">
-      <post-form
-          @create="createPost"
-      />
-    </my-dialog>
+<!--    <my-dialog v-model:show="dialogVisible">-->
+<!--      <post-form-->
+<!--          @create="createPost"-->
+<!--      />-->
+<!--    </my-dialog>-->
 
-    <post-list
-        :posts="sortedAndSearchedPosts"
-        @remove="removePost"
-        v-if="!isPostsLoading"
-    />
-    <div v-else style="padding-left: 200px; color: red">LOADING...</div>
-    <div v-intersection="loadMorePosts" class="observer"></div>
+<!--    <post-list-->
+<!--        :posts="sortedAndSearchedPosts"-->
+<!--        @remove="removePost"-->
+<!--        v-if="!isPostsLoading"-->
+<!--    />-->
+<!--    <div v-else style="padding-left: 200px; color: red">LOADING...</div>-->
+<!--    <div v-intersection="loadMorePosts" class="observer"></div>-->
   </div>
 </template>
 
@@ -42,6 +42,7 @@ import MyButton from "@/components/UI/MyButton";
 import axios from "axios";
 import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
+import {ref} from "vue";
 
 //по дефолту всегда экспортируем объект
 export default {
@@ -59,12 +60,18 @@ export default {
       sortOptions: [
         {value: 'title', name: 'By Name'},
         {value: 'body', name: 'By description'},
-        {value: 'id', name: 'By id'}
       ]
     }
   },
   setUp(props){
-
+    const likes = ref(2)
+    console.log(likes)
+    const addLike = () => {
+      likes.value
+    }
+    return{
+      likes
+    }
   }
 }
 </script>
