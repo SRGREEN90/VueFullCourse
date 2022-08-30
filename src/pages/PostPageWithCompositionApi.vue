@@ -1,33 +1,31 @@
 <template>
   <div>
     <h1>Page with posts</h1>
-<!--    <my-input-->
-<!--        v-model="searchQuery"-->
-<!--        placeholder="Searching..."-->
-<!--        v-focus-->
-<!--    />-->
-<!--    <div class="app_btns">-->
-<!--      <my-button @click="showDialog" >-->
-<!--        Create a user-->
-<!--      </my-button>-->
-<!--      <my-select-->
-<!--          v-model="selectedSort"-->
-<!--          :options="sortOptions"-->
-<!--      />-->
-<!--    </div>-->
-<!--    <my-dialog v-model:show="dialogVisible">-->
-<!--      <post-form-->
-<!--          @create="createPost"-->
-<!--      />-->
-<!--    </my-dialog>-->
+    <my-input
+        v-model="searchQuery"
+        placeholder="Searching..."
+        v-focus
+    />
+    <div class="app_btns">
+      <my-button>
+        Create a user
+      </my-button>
+      <my-select
+          v-model="selectedSort"
+          :options="sortOptions"
+      />
+    </div>
+    <my-dialog v-model:show="dialogVisible">
+      <post-form
+      />
+    </my-dialog>
 
-<!--    <post-list-->
-<!--        :posts="sortedAndSearchedPosts"-->
-<!--        @remove="removePost"-->
-<!--        v-if="!isPostsLoading"-->
-<!--    />-->
-<!--    <div v-else style="padding-left: 200px; color: red">LOADING...</div>-->
-<!--    <div v-intersection="loadMorePosts" class="observer"></div>-->
+    <post-list
+        :posts="sortedAndSearchedPosts"
+        v-if="!isPostsLoading"
+    />
+    <div v-else style="padding-left: 200px; color: red">LOADING...</div>
+
   </div>
 </template>
 
@@ -41,6 +39,8 @@ import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
 import {ref} from "vue";
 import {usePosts} from "@/hooks/usePosts";
+import useSortedPosts from "@/hooks/useSortedPosts";
+import useSortedAndSearchedPosts from "@/hooks/useSortedAndSearchedPosts";
 
 //по дефолту всегда экспортируем объект
 export default {
@@ -63,9 +63,17 @@ export default {
   },
   setUp(props){
     const {posts, totalPages, isPostLoading} = usePosts(10)
+    const {sortedPosts, selectedSort} = useSortedPosts(posts)
+    const {searchQuery, sortedAndSearchedPosts} = useSortedAndSearchedPosts(sortedPosts)
+
     return{
-      likes,
-      addLike
+      posts,
+      totalPages,
+      isPostLoading,
+      sortedPosts,
+      selectedSort,
+      searchQuery,
+      sortedAndSearchedPosts
     }
   }
 }
