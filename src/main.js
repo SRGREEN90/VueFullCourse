@@ -3,7 +3,7 @@ import App from './App.vue'
 import components from '@/components/UI'
 import router from "@/router/router";
 import directives from "@/directives";
-import {store} from "core-js/internals/reflect-metadata";
+import store from '@/components/store';
 
 const app = createApp(App)
 
