@@ -7,8 +7,10 @@
         placeholder="Searching....."
         v-focus
     />
-    <div class="app_btns">
-      <my-button @click="showDialog" >
+    <div class="app__btns">
+      <my-button
+          @click="showDialog"
+      >
         Create a user
       </my-button>
 
@@ -29,28 +31,25 @@
         @remove="removePost"
         v-if="!isPostsLoading"
     />
-    <div v-else style="padding-left: 200px; color: red">LOADING...</div>
+    <div v-else style="padding-left: 200px; color: red">LOADING....</div>
     <div v-intersection="loadMorePosts" class="observer"></div>
-
-    <!--          <div class="page__wrapper">-->
-    <!--            <div-->
-    <!--                v-for="pageNumber in totalPages"-->
-    <!--                :key="pageNumber"-->
-    <!--                class="page"-->
-    <!--                :class="{'current-page': page === pageNumber}"-->
-    <!--                @click="changePage(pageNumber)"-->
-    <!--            >-->
-    <!--              {{pageNumber}}</div>-->
-    <!--          </div>-->
+              <div class="page__wrapper">
+                <div
+                    v-for="pageNumber in totalPages"
+                    :key="pageNumber"
+                    class="page"
+                    :class="{'current-page': page === pageNumber}"
+                    @click="changePage(pageNumber)"
+                >
+                  {{pageNumber}}</div>
+              </div>
   </div>
 </template>
 
 <script>
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
-// import MyDialog from "@/components/UI/MyDialog";
 import MyButton from "@/components/UI/MyButton";
-import axios from "axios";
 import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
@@ -60,7 +59,6 @@ export default {
     MyInput,
     MySelect,
     MyButton,
-    // MyDialog,
     PostForm,
     PostList
   },
@@ -119,7 +117,7 @@ export default {
 
 <style scoped>
 
-.app_btns{
+.app__btns{
   display: flex;
   justify-content: space-between;
   margin: 15px 0
