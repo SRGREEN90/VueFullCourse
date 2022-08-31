@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>PostPageWithCompositionApi</h1>
+    <h1>Post page with composition api</h1>
     <my-input
         v-model="searchQuery"
         placeholder="Searching..."
@@ -23,7 +23,9 @@
     <post-list
         :posts="sortedAndSearchedPosts"
         v-if="!isPostsLoading"
+        @remove="removePost"
     />
+
     <div v-else style="padding-left: 200px; color: red">LOADING...</div>
 
   </div>
@@ -57,15 +59,21 @@ export default {
       ]
     }
   },
-  setUp(props){
-    const {posts, totalPages, isPostLoading} = usePosts(10)
+  methods: {
+    removePost(post) {
+      this.posts = this.posts.filter(p => p.id !== post.id)
+    }
+  },
+
+  setup(props){
+    const {posts, totalPages, isPostsLoading} = usePosts(10)
     const {sortedPosts, selectedSort} = useSortedPosts(posts)
     const {searchQuery, sortedAndSearchedPosts} = useSortedAndSearchedPosts(sortedPosts)
 
     return{
       posts,
       totalPages,
-      isPostLoading,
+      isPostsLoading,
       sortedPosts,
       selectedSort,
       searchQuery,
