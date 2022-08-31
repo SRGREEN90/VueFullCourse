@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Page with posts</h1>
+    <h1>Post page with store</h1>
     <my-input
         :model-value="searchQuery"
         @update:model-value="setSearchQuery"
