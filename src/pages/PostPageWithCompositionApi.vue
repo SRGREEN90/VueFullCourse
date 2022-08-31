@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>Page with posts</h1>
+    <h1>PostPageWithCompositionApi</h1>
     <my-input
         v-model="searchQuery"
         placeholder="Searching..."
         v-focus
     />
-    <div class="app_btns">
+    <div class="app__btns">
       <my-button>
         Create a user
       </my-button>
@@ -32,12 +32,9 @@
 <script>
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
-//import MyDialog from "@/components/UI/MyDialog";
 import MyButton from "@/components/UI/MyButton";
-import axios from "axios";
 import MySelect from "@/components/UI/MySelect";
 import MyInput from "@/components/UI/MyInput";
-import {ref} from "vue";
 import {usePosts} from "@/hooks/usePosts";
 import useSortedPosts from "@/hooks/useSortedPosts";
 import useSortedAndSearchedPosts from "@/hooks/useSortedAndSearchedPosts";
@@ -48,7 +45,6 @@ export default {
     MyInput,
     MySelect,
     MyButton,
-    // MyDialog,
     PostForm,
     PostList
   },
@@ -81,7 +77,7 @@ export default {
 
 <style scoped>
 
-.app_btns{
+.app__btns{
   display: flex;
   justify-content: space-between;
   margin: 15px 0
